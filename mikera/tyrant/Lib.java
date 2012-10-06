@@ -488,12 +488,12 @@ public class Lib extends Object implements Serializable, Cloneable {
             throw new Error("Game.hero.lib not available!");
         String name = (String) thing.get("Name");
         if (name == null)
-            throw new Error("Trying to add unnamed object to Library!");
+            throw new Error("Essaye d'ajouter un objet non-nommé à la Bibliothèque !");
 
         prepareAdd(thing);
         
         if (library.lib.get(name)!=null) {
-            Game.warn("Trying to add duplicate object ["+name+"] to library!");      
+            Game.warn("Essaye d'ajouter un objet dupliqué ["+name+"] à la Bibliothèque !");      
         }
         library.lib.put(name, thing);
         library.lowerCaseNames.put(name.toLowerCase(),name);
@@ -520,7 +520,7 @@ public class Lib extends Object implements Serializable, Cloneable {
         if (!Lib.isBaseClass(t)) {
             if (t.getStat("LevelMin")<=0) {
                 t.set("LevelMin",1);
-                Game.warn("Warning: no LevelMin for "+name);
+                Game.warn("Avertissement : pas de LevelMin pour "+name);
             }
         }
         if (t.getStat("Level")<=t.getStat("LevelMin")) {
@@ -867,7 +867,7 @@ public class Lib extends Object implements Serializable, Cloneable {
         Spell.updateIngredients();
         
         if (Game.isDebug()) {
-        	System.out.println("Library initialisation complete");
+        	System.out.println("Initialisation bibliothèque complété");
         	System.out.println(instance().stats());
         }
     }

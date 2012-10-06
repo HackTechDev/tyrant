@@ -282,15 +282,15 @@ public class InventoryPanel extends Screen implements ItemSelectable {
 
 		g.setColor(QuestApp.INFOTEXTCOLOUR);
 		
-		String bottomString = "ESC=Cancel    /=Filter";
+		String bottomString = "Echap=Annuler    /=Filtrer";
         
 		if (page > 0)
-			bottomString = bottomString + " Up=Previous ";
+			bottomString = bottomString + " Haut=Précédent ";
 		if (((page + 1) * PAGESIZE) < things.length)
-			bottomString = bottomString + " Down=Next ";
-		String weightstring = "Weight: " + Game.hero().getInventoryWeight() / 100 + " / " + Being.maxCarryingWeight(Game.hero()) / 100 + "s";
+			bottomString = bottomString + " Bas=Suivant ";
+		String weightstring = "Poids: " + Game.hero().getInventoryWeight() / 100 + " / " + Being.maxCarryingWeight(Game.hero()) / 100 + "s";
         if(allThings.length != things.length) {
-            weightstring += "    *Filtering* " + lastFilter; 
+            weightstring += "    *Filtrage* " + lastFilter; 
         }
 		g.drawString(Text.centrePad(bottomString, weightstring, 80), 20, getSize().height - 10);
 	}

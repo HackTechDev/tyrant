@@ -159,10 +159,10 @@ public class QuestApp extends Applet implements Runnable {
 		String[] racedescriptions = Hero.heroRaceDescriptions();
 		if (race == null) {
 			DetailedListScreen ls = new DetailedListScreen(
-					"What race are you?", raceherostrings, racedescriptions);
+					"A quelle race appartenez-vous ?", raceherostrings, racedescriptions);
 			ls.setForeground(new Color(128, 128, 128));
 			ls.setBackground(new Color(0, 0, 0));
-			ls.bottomString = "Press a letter key to select your race";
+			ls.bottomString = "Appuyer sur une lettre pour selectionner la race.";
 			switchScreen(ls);
 			while (true) {
 				race = (String) ls.getObject();
@@ -186,9 +186,9 @@ public class QuestApp extends Applet implements Runnable {
 		if (profession == null) {
 
 			DetailedListScreen ls = new DetailedListScreen(
-					"What is your profession?", professionstrings,
+					"Quelle est votre profession ?", professionstrings,
 					professiondescriptions);
-			ls.bottomString = "Press a letter key to select your profession";
+			ls.bottomString = "Appuyer sur une lettre pour sélectionner une profession.";
 			ls.setForeground(new Color(128, 128, 128));
 			ls.setBackground(new Color(0, 0, 0));
 			switchScreen(ls);
@@ -226,7 +226,7 @@ public class QuestApp extends Applet implements Runnable {
 		Hero.setHeroName(h, name);
 
 		System.out.println((System.currentTimeMillis() - start)
-				+ "ms to createHero");
+				+ "ms pour créer un héros : createHero");
 		return h;
 	}
 
@@ -276,7 +276,7 @@ public class QuestApp extends Applet implements Runnable {
 
 		Game.message("");
 		while ((hname == null) || hname.equals("")) {
-			hname = Game.getLine("Enter your name: ");
+			hname = Game.getLine("Entrer votre nom : ");
 			if (hname.equals("ESC")) {
 				return null;
 			}
@@ -308,8 +308,8 @@ public class QuestApp extends Applet implements Runnable {
 			repaint();
 
 			if (!isapplet && gameFileFromCommandLine != null) {
-				Game.message("Loading " + gameFileFromCommandLine
-						+ " game file...");
+				Game.message("Chargement du fichier-jeu " + gameFileFromCommandLine
+						+ "...");
 				final String ret = Game.tryToRestore(gameFileFromCommandLine);
 				if (ret == null) {
 					setupScreen();
@@ -317,21 +317,21 @@ public class QuestApp extends Applet implements Runnable {
 					continue;
 				}
 
-				Game.message("Load game failed: " + ret);
-				Game.message("Press any key (except Tab) to continue");
+				Game.message("Chargement du jeu échoué : " + ret);
+				Game.message("Appuyer sur une touche pour continuer (excepter la touche [Tab])");
 				Game.getInput(false); //!!! not very good - this does not
 				//recognize Tab key, for instance
 
 			}
 
 			Game.message("");
-			Game.message("Welcome to Tyrant. You are playing version "
-					+ Game.VERSION + ". Would you like to:");
-			Game.message(" [a] Create a new character");
-			Game.message(" [b] Load a previously saved game");
-			Game.message(" [c] Play in debug mode");
-			Game.message(" [d] QuickStart debug mode");
-			Game.message(" [e] Edit a map");
+			Game.message("Bienvenue à Tyrant. Vous jouez à la version "
+					+ Game.VERSION + ". Que voulez-vous faire :");
+			Game.message(" [a] Créer un nouveau jeu");
+			Game.message(" [b] Charger un jeu précédement sauvegarder");
+			Game.message(" [c] Jouer en mode débogue");
+			Game.message(" [d] Démarrage rapide en mode débogue");
+			Game.message(" [e] Editer une carte");
 			mp.repaint();
 
 			// create lib in background
@@ -360,7 +360,7 @@ public class QuestApp extends Applet implements Runnable {
 								+ "\n"
 								+ "After a long day of travel, you see a small inn to the west. Perhaps this would be a good place to meet some and learn some more about these strange lands.\n"
 								+ "\n"
-								+ "                           [ Press a key to continue ]\n"
+								+ "                       [ Appuyer sur une touche pour continuer ]\n"
 								+ "\n" + "\n" + "\n" + "\n" + "\n");
 
 				l.setForeground(new Color(192, 160, 64));

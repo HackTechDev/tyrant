@@ -50,7 +50,7 @@ public class Special {
 			Game.message(t.getString("Message"));
 			
 			if (!Game.isDebug()) {
-				Game.message("[Press space to continue]");
+				Game.message("[Appuyer sur [Espace] pour continuer]");
 				for (char c=Game.getChar(); c!=' ';) {
                     c=Game.getChar();            
                 }

@@ -20,7 +20,7 @@ public class QuestApplication {
 	public static void main(String args[]) {
 		Game.loadVersionNumber();
 		
-		Frame f = new Frame("Tyrant - The Adventure - v"+Game.VERSION);
+		Frame f = new Frame("Tyrant - L'Aventure - v"+Game.VERSION);
 		f.setBackground(Color.black);
 		f.addWindowListener(new WindowAdapter() {
 			public void windowClosing(WindowEvent e) {

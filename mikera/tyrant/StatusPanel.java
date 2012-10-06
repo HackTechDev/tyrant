@@ -49,7 +49,7 @@ public class StatusPanel extends TPanel {
 			hel = 0;
 		if (hel > 1)
 			hel = 1;
-		paintLabel(g, "Health: " + hp + "/" + hpm, 10, 18);
+		paintLabel(g, "Santé : " + hp + "/" + hpm, 10, 18);
 		paintBar(g, 10 + 16 * charwidth, 10, width - 20 - 16 * charwidth, 16,
 				healthcolor, Color.black, hel);
 
@@ -57,7 +57,7 @@ public class StatusPanel extends TPanel {
 		int mpm = h.getStat(RPG.ST_MPSMAX);
 		float pow = ((float) mp) / mpm;
 
-		paintLabel(g, "Power:  " + mp + "/" + mpm, 10, 44);
+		paintLabel(g, "Pouvoir :  " + mp + "/" + mpm, 10, 44);
 		if (pow < 0)
 			pow = 0;
 		if (pow > 1)
@@ -72,11 +72,11 @@ public class StatusPanel extends TPanel {
 		yPos += 5*charheight;
 
 		// experience
-		paintLabel(g, "Exp: "+h.getStat(RPG.ST_EXP)+" / "+Hero.calcXPRequirement(h.getStat("Level")+1),10, yPos);
+		paintLabel(g, "Exp : "+h.getStat(RPG.ST_EXP)+" / "+Hero.calcXPRequirement(h.getStat("Level")+1),10, yPos);
 		yPos += charheight;
 		
 		// experience
-		paintLabel(g, "Hunger: "+Text.capitalise(Hero.hungerString(h)),10, yPos);
+		paintLabel(g, "Faim : "+Text.capitalise(Hero.hungerString(h)),10, yPos);
 		yPos += charheight;
 		
 		paintLabel(g, (m == null) ? "Six Feet Under" : m.getDescription(), 10, yPos);
@@ -135,8 +135,8 @@ public class StatusPanel extends TPanel {
 
 	}
 
-	private static String[] stats1=new String[] {"SK","ST","AG","TG","Level"};
-	private static String[] stats2=new String[] {"IN","WP","CH","CR","Luck"};
+	private static String[] stats1=new String[] {"SK","ST","AG","TG","Niveau"};
+	private static String[] stats2=new String[] {"IN","WP","CH","CR","Chance"};
 	public void paintStats(Graphics g,int x, int y) {
 		for (int i=0; i<stats1.length; i++) {
 			paintStat(g,stats1[i],x,y+i*charheight);
@@ -148,7 +148,7 @@ public class StatusPanel extends TPanel {
 	}
 	
 	public void paintStat(Graphics g,String s, int x, int y) {
-		paintLabel(g,s+": "+Game.hero().getStat(s),x,y);
+		paintLabel(g,s+" : "+Game.hero().getStat(s),x,y);
 	}
 		
 	public static void paintBar(Graphics g, int x, int y, int w, int h,

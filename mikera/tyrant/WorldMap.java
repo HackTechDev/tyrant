@@ -260,7 +260,7 @@ public class WorldMap {
 				if (level<=2) break;
 				
 				Game.message("You are ambushed by a horde of fearsome monsters!");
-				Game.message("[Press space to continue]");
+				Game.message("[Appuyer sur [Espace] pour continuer]");
 				Game.getOption(" ");
 				
 				Map nm = createArea(map,x, y);

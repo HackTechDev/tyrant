@@ -159,7 +159,7 @@ public class MapMaker {
         		String c=line.substring(x, x + 1);
         		String tileName=(String)legend.get(c);
         		BaseObject tile=Lib.get(tileName);
-        		if (tile==null) throw new Error("Legend ["+c+"] not recognised");
+        		if (tile==null) throw new Error("Légende ["+c+"] non reconnu");
         		int tileValue=tile.getStat("TileValue");
         		map.setTile(x, y, tileValue);
         	}
@@ -215,7 +215,7 @@ public class MapMaker {
     
     public Map promptAndLoad() {
         String filename = "map.txt";
-        FileDialog fileDialog = new FileDialog(new Frame(), "Load map", FileDialog.LOAD);
+        FileDialog fileDialog = new FileDialog(new Frame(), "Chargement carte", FileDialog.LOAD);
         fileDialog.setFile(filename);
         fileDialog.setVisible(true);
 
@@ -232,11 +232,11 @@ public class MapMaker {
                 contents.append(MapMaker.NL);
             }
             Map map = create(contents.toString(), true);
-            Game.message("Map loaded - " + filename);
+            Game.message("Carte chargé - " + filename);
             return map;
         } catch (Exception e) {
             e.printStackTrace();
-            Game.message("Error while loading map, check console");
+            Game.message("Erreur pendant le chargement de la carte, vérifier la console");
             return null;
         }
     

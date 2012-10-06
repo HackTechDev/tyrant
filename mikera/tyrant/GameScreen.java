@@ -573,7 +573,7 @@ public class GameScreen extends Screen {
 		}
 		
 		if ((ch == 'x')) {
-			Game.message("Load map: ");
+			Game.message("Chargement carte: ");
             MapMaker mapMaker = new MapMaker();
             Map newMap = mapMaker.promptAndLoad();
             if(newMap == null) return;
@@ -599,18 +599,18 @@ public class GameScreen extends Screen {
 		}
 
 		if (ch == 'q') {
-			Game.message("Are you sure you want to quit this game (y/n)");
+			Game.message("Etez-vous sûr de vouloir quitter ce jeu (y/n) ?");
 			if (Game.getOption("yn") == 'y')
 				h.set("HPS", -10);
 		}		
 		
 		if (ch == 't') {
-			String s=Game.getLine("Enter tile number: ");
+			String s=Game.getLine("Entrer le nombre de pavé : ");
 			getMappanel().currentTile=Tile.tiles[Integer.parseInt(s)].getStat("TileValue");
 		}	
 		
 		if (ch == 'g') {
-			String s=Game.getLine("Enter target map: ");
+			String s=Game.getLine("Entrer la carte cible : ");
 			String[] ss=s.split(":");
 			String complex=ss[0];
 			int lev=(ss.length==2)?Integer.parseInt(ss[1]):1;
@@ -1275,7 +1275,7 @@ public class GameScreen extends Screen {
 			s += Quest.getQuestText((Thing)quests.get(i)) + "\n";
 			
 		}
-		s += "[Press space to continue]";
+		s += "[Appuyer sur [Espace] pour continuer]";
 		Game.infoScreen(s);
 		return;		
 	}

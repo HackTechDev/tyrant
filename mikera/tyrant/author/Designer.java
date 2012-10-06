@@ -409,7 +409,7 @@ public class Designer {
         QuestApp.isapplet = false;
         Game.setDebug(true);
         final Designer designer = this;
-        frame = new Frame("Tyrant - Designer - v" + Game.VERSION);
+        frame = new Frame("Tyrant - Editeur de carte - v" + Game.VERSION);
         frame.setBackground(Color.black);
         frame.addWindowListener(new WindowAdapter() {
             public void windowClosing(WindowEvent e) {
@@ -537,16 +537,16 @@ public class Designer {
 
     private MenuBar createMenuBar() {
         MenuBar menuBar = new MenuBar();
-        menuBar.add(createMenu("File", new String[]{"Open Map", "Save Map", "Exit"}, 
+        menuBar.add(createMenu("Fichier", new String[]{"Ouvrir Carte", "Sauver Carte", "Quitter"}, 
             new Action[]{Action.LOAD_GAME, Action.SAVE_GAME, Action.EXIT}, 
             new boolean[] {true, true}));
-        menuBar.add(createMenu("Edit", new String[]{"Undo", "Redo", "Resize"}, 
+        menuBar.add(createMenu("Edition", new String[]{"Defaire", "Refaire", "Redimensionner"}, 
             new Action[]{UNDO, REDO, RESIZE}, 
             new boolean[] {false, true}));
-        menuBar.add(createMenu("Mode", new String[]{"Paint", "Erase", "Fill", "Select", "Delete"}, 
+        menuBar.add(createMenu("Mode", new String[]{"Peindre", "Effacer", "Remplir", "Selectionner", "Supprimer"}, 
                 new Action[]{POINT, ERASE, FILL, SELECT, DELETE}, 
                 new boolean[] {false, false, true}));
-        menuBar.add(createMenu("Window", new String[]{"Show Thing editor"}, 
+        menuBar.add(createMenu("Fenêtre", new String[]{"Montrer editeur Chose"}, 
             new Action[]{SELECT}, 
             new boolean[] {false}));
         
@@ -583,7 +583,7 @@ public class Designer {
     }
 
     private void createTilePalette() {
-        tilePalette = new Frame("Tiles");
+        tilePalette = new Frame("Pavés");
         tilePalette.addWindowListener(new WindowAdapter() {
             public void windowClosing(WindowEvent e) {
                 tilePalette.setVisible(false);
@@ -595,12 +595,12 @@ public class Designer {
         tilePalette.setLayout(new BorderLayout());
         tilesScreen = new InventoryScreen(false, true);
         tilePalette.add(tilesScreen, BorderLayout.CENTER);
-        tilesScreen.setUp("Tiles", null, tilesAsThings());
+        tilesScreen.setUp("Pavés", null, tilesAsThings());
         tilesScreen.getInventoryPanel().addItemListener(new ItemListener() {
             public void itemStateChanged(ItemEvent e) {
                 currentThing = (Thing) e.getItem();
                 currentMapAdder = addTile;
-                System.out.println("current thing is " + currentThing);
+                System.out.println("Chose courante est " + currentThing);
                 if(switchPalette) frame.requestFocus();
             }
         });
@@ -609,7 +609,7 @@ public class Designer {
     }
     
     private void createThingPalette() {
-        thingPalette = new Frame("Things");
+        thingPalette = new Frame("Choses");
         thingPalette.addWindowListener(new WindowAdapter() {
             public void windowClosing(WindowEvent e) {
                 thingPalette.setVisible(false);
@@ -621,12 +621,12 @@ public class Designer {
         thingPalette.setLayout(new BorderLayout());
         thingsScreen = new InventoryScreen(false, true);
         thingPalette.add(thingsScreen, BorderLayout.CENTER);
-        thingsScreen.setUp("Things", null, getThings());
+        thingsScreen.setUp("Choses", null, getThings());
         thingsScreen.getInventoryPanel().addItemListener(new ItemListener() {
             public void itemStateChanged(ItemEvent e) {
                 currentThing = (Thing) e.getItem();
                 currentMapAdder = addThing;
-                System.out.println("current thing is " + currentThing);
+                System.out.println("Chose courante est " + currentThing);
                 if(switchPalette) frame.requestFocus();
             }
         });
@@ -799,7 +799,7 @@ public class Designer {
     
     private void doFillWith(List queue, int tileToChange) {
         if(currentMapAdder == addThing) {
-            Game.message("Currently you can only fill with tiles.");
+            Game.message("Actuellement ,vous ne pouvez seulement remplir qu'avec des pavés.");
             return;
         }
         // check orthogonial directions only
@@ -974,7 +974,7 @@ public class Designer {
     
     private void saveMap() {
         String filename = "map.txt";
-        FileDialog fileDialog = new FileDialog(new Frame(), "Save map", FileDialog.SAVE);
+        FileDialog fileDialog = new FileDialog(new Frame(), "Sauvegarder Carte", FileDialog.SAVE);
         fileDialog.setFile(filename);
         fileDialog.setVisible(true);
 
@@ -987,10 +987,10 @@ public class Designer {
             f.write(mapAsText.getBytes());
         } catch (Exception e) {
             e.printStackTrace();
-            Game.message("Error while saving map, check console");
+            Game.message("Erreur pendant la sauvegarde de la carte, vérifier la console");
             return;
         }
-        Game.message("Map saved - " + filename);
+        Game.message("Carte sauvegardé - " + filename);
     }
     
     private void openThingEditor(Point mapPoint) {

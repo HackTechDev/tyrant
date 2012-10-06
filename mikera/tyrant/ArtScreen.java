@@ -72,12 +72,12 @@ public class ArtScreen extends Screen {
 			g.drawString(s, 50, lineheight * (i + 2));
 		}
 
-		String bottomstring = "ESC=Cancel ";
+		String bottomstring = "Echap=Annuler ";
 		if (page > 0)
-			bottomstring = bottomstring + " P=Previous ";
+			bottomstring = bottomstring + " P=Précédent ";
 		if (((page + 1) * pagesize) < arts.length)
-			bottomstring = bottomstring + " N=Next ";
-		String powerstring = "Power: " + Game.hero().getStat(RPG.ST_MPS) + " / "
+			bottomstring = bottomstring + " N=Suivant ";
+		String powerstring = "Pouvoir: " + Game.hero().getStat(RPG.ST_MPS) + " / "
 				+ Game.hero().getStat(RPG.ST_MPSMAX);
 		g.drawString(Text.centrePad(bottomstring, powerstring, 55), 20,
 				getSize().height - 10);
