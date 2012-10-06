@@ -1,0 +1,128 @@
+<!--Tyrant build file by mikera-->
+
+<project name="Tyrant" default="dist" basedir=".">
+	<description>
+        Tyrant Ant Build File
+    </description>
+
+	<!--Set up base directories-->
+	<property name="src" location="." />
+	<property name="build" location="build" />
+	<property name="build-tests" location="build-tests" />
+	<property name="builds" location="builds" />
+	<property name="reports.tests" location="reports" />
+
+	<!--Create build dirctory-->
+	<target name="init">
+		<mkdir dir="${build}" />
+		<mkdir dir="${build-tests}" />
+		<mkdir dir="${builds}" />
+		<mkdir dir="${reports.tests}" />
+	</target>
+
+	<!--Compile Tyrant source-->
+	<target name="compile" depends="init" description="compile the source code">
+		<javac srcdir="${src}"
+               destdir="${build}">
+			<classpath>
+				<pathelement path="${src}/lib/junit.jar"/>
+				<pathelement path="${src}/lib/forms-1.0.5.jar"/>
+			</classpath>
+		</javac>
+	</target>
+
+	<!-- Run unit tests -->
+	<target name="test" depends="compile" description="run unit tests">
+		<javac classpath="$(build}" srcdir="${src}" destdir="${build-tests}">
+			<classpath>
+				<pathelement path="${src}/lib/junit.jar"/>
+				<pathelement path="${src}/lib/forms-1.0.5.jar"/>
+			</classpath>
+			<include name="mikera/tyrant/test/*.java"/>
+		</javac>
+		<junit haltonerror="true" reloading="false">
+			<formatter type="plain" />
+			<classpath>
+				<pathelement location="${build}" />
+				<pathelement location="${build-tests}" />
+			</classpath>
+			<batchtest todir="${reports.tests}">
+				<fileset dir="${build-tests}">
+					<include name="**/*_TC.class" />
+				</fileset>
+			</batchtest>
+		</junit>
+	</target>
+
+	<target name="versionInfo">
+		<property file="version.txt" />
+		<echo>Version Number: ${version}</echo>
+	</target>
+
+	<!--Build the jar file-->
+	<target name="makejar" depends="compile,versionInfo" description="build the jar file">
+		<!--copy .png images into build directory-->
+		<copy todir="${build}/images">
+			<fileset dir="${src}/images">
+				<include name="*.png" />
+			</fileset>
+		</copy>
+		
+		<!--copy map .txt images into build directory-->
+		<copy todir="${build}/maps">
+			<fileset dir="${src}/maps">
+				<include name="**/*.txt" />
+			</fileset>
+		</copy>
+		
+
+		<!-- copy version number file to build directory-->
+		<copy file="${src}/version.txt" toFile="${build}/version.txt" />
+
+		<!-- create distribution jar file-->
+		<jar jarfile="tyrant.jar" basedir="${build}" excludes="mikera\tyrant\test\**, mikera\tyrant\perf\**">
+			<manifest>
+				<attribute name="Built-By" value="mikera" />
+				<attribute name="Main-Class" value="mikera.tyrant.QuestApplication" />
+			</manifest>
+		</jar>
+
+		<available file="myKeystore" property="keystore.exists" />
+
+	</target>
+
+	<!--Sign jar if we have an appropriate keystore-->
+	<target name="signjar" depends="makejar" if="keystore.exists" description="sign the jar file">
+		<signjar jar="tyrant.jar" alias="mikera" keystore="myKeystore" storepass="tyrantpass">
+		</signjar>
+	</target>
+
+	<!--Create tyrant.jar distribution-->
+	<target name="dist" depends="makejar,signjar" description="generate the distribution">
+
+		<!-- create source distribution-->
+		<zip destfile="${builds}/tyrant-src-${version}.zip">
+			<fileset dir=".">
+				<include name="**/*.java" />
+				<include name="images/*.png" />
+				<include name="maps/**/*.txt" />
+				<include name="build.xml" />
+				<include name="mikeradebug" />
+			</fileset>
+		</zip>
+
+		<!-- copy to www folder -->
+		<copy file="tyrant.jar" toFile="${builds}/tyrant.jar" />
+
+		<copy file="tyrant.jar" toFile="${builds}/tyrant-${version}.jar" />
+
+	</target>
+
+	<target name="clean" description="clean up">
+		<delete dir="${build}" />
+		<delete dir="${build-tests}" />
+		<delete dir="${reports.tests}" />
+		<delete file="tyrant.jar" />
+	</target>
+</project>
+
